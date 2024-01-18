@@ -32,7 +32,6 @@ export default function Connected() {
         <Link className="transform rounded bg-gray-600 text-xl py-3 font-bold duration-300 hover:bg-gray-500 text-opacity-50  text-white" to="/Dashboard">
         Se Connecter
         </Link>
-
     </section>
     <div className='space-y-4 mt-6'> 
     <Link to="/MotDePasse" className="transform  text-center font-bold text-yellow-500 duration-300 hover:text-white">Mot de passe oublié?</Link>

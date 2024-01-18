@@ -4,6 +4,7 @@ import Connected from '../components/connected'
 import Inscription from '../components/inscription'
 import MotDePasse from '../components/Mot-de-passe'
 import Template from './Template'
+import HotelContent from '../components/HotelContent'
 
 export default function Routes() {
     const router = createBrowserRouter([
@@ -25,6 +26,13 @@ export default function Routes() {
         {
             path:"/Dashboard",
             element:<Template/>,
+            children: [
+                {
+                    index: true,
+                    element:<HotelContent/>,
+        
+                },
+              ],
 
         }
 

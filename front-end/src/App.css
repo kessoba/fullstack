@@ -8,3 +8,11 @@
   background-repeat: no-repeat;
   height: 100vh;
 }
+@media (max-width: 768px) {
+.bg-connect{
+  height: auto;
+
+}   
+ /* Ou toute autre valeur appropriée pour les écrans plus petits */
+}
+
