@@ -5,6 +5,7 @@ import Inscription from '../components/inscription'
 import MotDePasse from '../components/Mot-de-passe'
 import Template from './Template'
 import HotelContent from '../components/HotelContent'
+import ContainerCards from '../components/containerCards'
 
 export default function Routes() {
     const router = createBrowserRouter([
@@ -29,9 +30,14 @@ export default function Routes() {
             children: [
                 {
                     index: true,
-                    element:<HotelContent/>,
+                    element:<ContainerCards/>,
         
                 },
+                {
+                    path:"HotelContent",
+                    element:<HotelContent/>
+                }
+
               ],
 
         }

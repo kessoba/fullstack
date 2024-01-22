@@ -5,11 +5,12 @@ import SidebarContent from './sidebare-contente';
 
 function Sidebar() {
   return (
-    <div className="flex bg-connect justify-between flex-col h-screen max-md:flex-row max-md:h-fit text-white">
-      <SidebarContent className="fixed"/>
+    <div className="flex  bg-connect justify-between flex-col max-md:h-fit max-md:flex-row md:h-2 text-white ">
+      <SidebarContent className="" />
       <UserProfile className="max-md:hidden" />
     </div>
   );
+
 }
 
 export default Sidebar;
