@@ -1,6 +1,7 @@
 import React from 'react';
 import Logo from '../assets/images/logo.png';
 import { Link } from 'react-router-dom';
+import FormInput from './formInput';
 
 
 const FormContainer = ({onSubmit, title, inputs, actionText, actionLink ,additionalText,includeCheckbox  }) => {
@@ -25,9 +26,12 @@ const FormContainer = ({onSubmit, title, inputs, actionText, actionLink ,additio
         <div className="text-center text-black text-2xl font">{title}</div>
         {additionalText && <p className="text-start text-black ">{additionalText}</p>}  
         {inputs.map((input, index) => (
-          <div key={index} className="w-full transform border-b-2 bg-transparent text-lg duration-300 focus-within:border-gray-500">
-            <input type={input.type}  placeholder={input.placeholder}  onChange={(e) => handleInputChange(input.type, e)}  className="w-full border-none bg-transparent outline-none focus:outline-none" />
-          </div>
+          <FormInput
+            key={index}
+            type={input.type}
+            placeholder={input.placeholder}
+            onChange={(value) => handleInputChange(input.type, value)}
+          />
         ))}
         {includeCheckbox && (
           <div className="text-black text-xl">
@@ -49,7 +53,7 @@ const FormContainer = ({onSubmit, title, inputs, actionText, actionLink ,additio
       </form>
       <div className="space-y-4 mt-6">
         {inputs[0].forgotPasswordLink && (
-          <Link to={inputs[0].forgotPasswordLink} className="transform text-center font-bold text-yellow-500 duration-300 hover:text-white">
+          <Link to= {inputs[0].forgotPasswordLink} className="transform text-center font-bold text-yellow-500 duration-300 hover:text-white">
             {inputs[0].forgotPasswordText}
           </Link>
         )}

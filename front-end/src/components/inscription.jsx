@@ -28,6 +28,7 @@ const Inscription = () => {
     ...commonProperties,
   }));
 
+
   return (
     <div>
     <FormContainer 
@@ -35,6 +36,7 @@ const Inscription = () => {
       inputs={enhancedInputs}
       actionText="S'inscrire"
       actionLink=""
+      includeCheckbox={true}
       
     />
      <ToastContainer/>
