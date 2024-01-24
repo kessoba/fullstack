@@ -32,7 +32,7 @@ export default function Routes() {
                     index: true,
                     element:<ContainerCards/>,
         
-                },
+                }, 
                 {
                     path:"HotelContent",
                     element:<HotelContent/>

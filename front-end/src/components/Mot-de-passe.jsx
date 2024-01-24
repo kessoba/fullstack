@@ -1,8 +1,4 @@
 import React from 'react'
-// import 'bootstrap/dist/css/bootstrap.min.css';
-// import 'bootstrap/dist/js/bootstrap.bundle.min';
-import Logo from "../assets/images/logo.png";
-import { Link } from 'react-router-dom';
 import FormContainer from './formContainer';
 
 export default function MotDePasse() {
@@ -27,6 +23,7 @@ export default function MotDePasse() {
       inputs={enhancedInputs}
       actionText="Envoyer"
       actionLink="/"
+      additionalText='Entrez votre adresse e-mail ci-dessous et nous vous enverrons des instructions sur la façon de modifier votre mot de passe.'
       
     />
 

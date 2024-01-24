@@ -1,14 +1,20 @@
-import React from 'react';
+
 import FormContainer from './formContainer';
 import Logo from "../assets/images/logo.png";
-import { Link } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 
 const Inscription = () => {
   const inputs = [
     { type: 'text', placeholder: 'Nom' },
-    { type: 'text', placeholder: 'E-mail' },
+    { type: 'text', placeholder: 'E-mail',},
     { type: 'password', placeholder: 'Mot de passe' },
   ];
+  const inputChek=[
+    {
+      type:'checkbox'
+    }
+  ]
+  console.log( "donnees input", inputs)
 
   const commonProperties = {
     checkboxLabel: 'Accepter les termes et la politique',
@@ -18,17 +24,21 @@ const Inscription = () => {
   };
   const enhancedInputs = inputs.map((input) => ({
     ...input,
+    inputChek,
     ...commonProperties,
   }));
 
   return (
-    <FormContainer
+    <div>
+    <FormContainer 
       title="Inscrivez-vous en tant que Admin"
       inputs={enhancedInputs}
       actionText="S'inscrire"
-      actionLink="/"
+      actionLink=""
       
     />
+     <ToastContainer/>
+    </div>
   );
 };
 
