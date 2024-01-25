@@ -25,7 +25,7 @@ export default function Routes() {
 
         },
         {
-            path:"/Dashboard",
+            path:"/dashboard",
             element:<Template/>,
             children: [
                 {

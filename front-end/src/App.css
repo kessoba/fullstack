@@ -11,39 +11,19 @@ body{
   background-repeat: no-repeat;
   height: 100vh;
 }
-/* @media (max-width: 768px) {
-.bg-connect{
-  height: auto;
-
-}  */
-
-
- /* Ou toute autre valeur appropriée pour les écrans plus petits */
-
-
-.modal {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  padding: 2rem;
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border-radius: 0.25rem;
-  width: 400px;
+.bg-Side{
+  background-image: url(./assets/images/background.jpeg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
+}
+@media (max-width: 768px) {
+.bg-Side{
+  height: fit-content;
+}
 }
 
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 
 
     

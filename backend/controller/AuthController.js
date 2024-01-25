@@ -5,7 +5,7 @@ const secretKey= process.env.JWT_SECRET;
 // foncton for registerd
 async function registerUser(req,res){
 
-    let{Name,email,password} = req.body;
+    let {Name,email,password} = req.body;
 
     try{
         const duplicate = await User.find({email});
@@ -16,17 +16,14 @@ async function registerUser(req,res){
             let result = await newUser.save();
             console.log(result)
         res.status(201).send({message:" User registerd successfull "});
-     
 
     }catch(err) {
         console.log(err)
         res.status(400).send(err);
-
     } 
 }
 // fonction for login
 async function loginUser(req,res){
-    
     try{
       const {email,password}= req.body;
       const user= await User.findOne({email});
@@ -35,7 +32,7 @@ async function loginUser(req,res){
       }
       const isPasswordValid= await user.comparePassword(password);
       if(!isPasswordValid){
-        return res.status(404).send({err:"Password s not valid"})
+        return res.status(404).send({message:"Password s not valid"})
       }
       let token = jwt.sign({ userId: user?._id }, secretKey, { expiresIn: '1h' });
       let finalData ={
@@ -51,9 +48,6 @@ async function loginUser(req,res){
 
     }
 }
-
-
-
 const AuthController={
     registerUser,
     loginUser

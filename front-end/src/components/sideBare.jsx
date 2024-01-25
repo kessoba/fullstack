@@ -5,7 +5,7 @@ import SidebarContent from './sidebare-contente';
 
 function Sidebar() {
   return (
-    <div className="flex bg-connect justify-between flex-col max-md:h-fit max-md:flex-row  text-white ">
+    <div className="flex bg-Side justify-between flex-col max-md:h-fit max-md:flex-row  text-white ">
       <SidebarContent className="" />
       <UserProfile className="max-md:hidden" />
     </div>

@@ -1,37 +1,31 @@
 import React from 'react';
 import Logo from '../assets/images/logo.png';
 import { Link } from 'react-router-dom';
-import FormInput from './formInput';
+import {BeatLoader} from "react-spinners"
 
+const FormContainer = ({onSubmit, title,loading, inputs, actionText, actionLink ,additionalText,includeCheckbox  }) => {
 
-const FormContainer = ({onSubmit, title, inputs, actionText, actionLink ,additionalText,includeCheckbox  }) => {
-
-  const handleInputChange = (fieldName, e) => {
-    const updatedValue = e.target.value;
-    console.log(`Champ ${fieldName} mis à jour avec la valeur : ${updatedValue}`);
-
-    if (inputs.find(input => input.type === fieldName && input.onChange)) {
-      inputs.find(input => input.type === fieldName && input.onChange)(updatedValue);
-    }
-  };
   return (
-    <main className="mx-auto   flex gap-4 flex-col h-screen w-full items-center justify-center bg-connect">
+    <main className="mx-auto flex gap-4 flex-col h-screen w-full items-center justify-center bg-connect">
       <div className="flex gap-4">
         <div className="">
           <img src={Logo} alt="" className="w-10" />
         </div>
         <h2 className="text-2xl font-bold text-white whitespace-nowrap text-opacity-50">RED PRODUCT</h2>
       </div>
-      <form  className="flex w-[25rem] shadow rounded p-8 flex-col gap-14 border bg-white">
+      <form onSubmit={onSubmit} className="flex w-[25rem] shadow rounded p-8 flex-col gap-14 border bg-white">
         <div className="text-center text-black text-2xl font">{title}</div>
         {additionalText && <p className="text-start text-black ">{additionalText}</p>}  
         {inputs.map((input, index) => (
-          <FormInput
-            key={index}
-            type={input.type}
-            placeholder={input.placeholder}
-            onChange={(value) => handleInputChange(input.type, value)}
-          />
+          <div key={index} className="w-full transform border-b-2 bg-transparent text-lg duration-300 focus-within:border-gray-500">
+            <input
+              type={input.type}
+              placeholder={input.placeholder}
+              value={input.value}
+              onChange={input.onChange}
+              className="w-full border-none bg-transparent outline-none focus:outline-none"
+            />
+          </div>
         ))}
         {includeCheckbox && (
           <div className="text-black text-xl">
@@ -47,8 +41,9 @@ const FormContainer = ({onSubmit, title, inputs, actionText, actionLink ,additio
           </div>
         )}
 
-        <button type='submit' className="transform rounded bg-gray-600 text-xl py-3 font-bold duration-300 hover:bg-gray-500 text-white text-opacity-50">
-          {actionText}
+        <button type='submit' className=" flex justify-center text-center transform rounded bg-gray-600 text-xl py-3 font-bold duration-300 hover:bg-gray-500 text-white text-opacity-50">
+          {actionText} 
+     {loading && <BeatLoader color="#fff"  />}
         </button>
       </form>
       <div className="space-y-4 mt-6">

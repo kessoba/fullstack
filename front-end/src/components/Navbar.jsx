@@ -4,10 +4,17 @@ import { AiOutlineSearch, AiOutlineBell } from "react-icons/ai";
 import { MdOutlineLogout } from "react-icons/md";
 import CardNav from './cardNav';
 import WelcomeSection from './WelcomSection';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+
+
 function Navbar() {
 
+const navigate= useNavigate()
 
+const handleLogout = () =>{
+  localStorage.removeItem('users')
+  navigate('/')
+}
   const location= useLocation();
     const path=location.pathname
     const getTitle=() =>{
@@ -17,12 +24,11 @@ function Navbar() {
                 return "Dashboard";
             case "/dashboard/HotelContent":
                 return 'Listes des hotels';
-                
-        
             default:
                 return 'Page introuvable';
         }
     }
+   
   return (
     <div className='shadow bg-white'>
     <nav className=" shadow bg-white p-4 flex items-center justify-between  ">
@@ -40,7 +46,7 @@ function Navbar() {
         <div className="flex items-center space-x-2">
         <img src="https://source.unsplash.com/100x100/?portrait" alt="" className="w-10 h-10 rounded-full dark:bg-gray-500" /> 
         </div>
-        <MdOutlineLogout className='text-black h-6 w-6'/>
+        <MdOutlineLogout onClick={handleLogout} className='text-black h-6 w-6'/>
       </div>
     </nav>
      <div className='m-6'>
