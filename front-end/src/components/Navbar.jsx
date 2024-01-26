@@ -5,12 +5,16 @@ import { MdOutlineLogout } from "react-icons/md";
 import CardNav from './cardNav';
 import WelcomeSection from './WelcomSection';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { getUserDetails } from '../Utils/getUser';
 
 
 function Navbar() {
 
 const navigate= useNavigate()
-
+const user = getUserDetails()
+if (!user) {
+  navigate('/')
+}
 const handleLogout = () =>{
   localStorage.removeItem('users')
   navigate('/')
