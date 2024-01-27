@@ -48,8 +48,29 @@ async function loginUser(req,res){
 
     }
 }
-const AuthController={
-    registerUser,
-    loginUser
+// fonction pour déconnexion
+async function logoutUser(req, res) {
+  try {
+      // Supprimez le jeton JWT ou la session de l'utilisateur ici
+      // Par exemple, si vous utilisez des sessions :
+      req.session.destroy(err => {
+          if (err) {
+              console.log(err);
+              return res.status(500).send({message: "Erreur lors de la déconnexion"});
+          }
+          res.status(200).send({message: "Déconnexion réussie"});
+      });
+  } catch (err) {
+      console.log(err);
+      res.status(400).send(err);
+  }
 }
+
+const AuthController = {
+  registerUser,
+  loginUser,
+  logoutUser  // Ajoutez cette ligne
+}
+
+
 module.exports = AuthController

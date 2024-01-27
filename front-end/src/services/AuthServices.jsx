@@ -24,10 +24,23 @@ const loginUser = (data) => {
             throw error; // Re-throw the error for the calling code to handle
         });
 }
+const logoutUser = () => {
+    return axios.post(`${SERVER_URL}/deconnexion`)
+        .then(response => {
+            console.log('Logout successful:', response.data);
+            return response.data;
+        })
+        .catch(error => {
+            console.error('Error during logout:', error);
+            throw error; // Re-throw the error for the calling code to handle
+        });
+}
+
 
 const AuthServices = {
     registerUser,
-    loginUser
+    loginUser,
+    logoutUser
 };
 
 export default AuthServices;

@@ -6,19 +6,22 @@ import CardNav from './cardNav';
 import WelcomeSection from './WelcomSection';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { getUserDetails } from '../Utils/getUser';
+import AuthServices from "../services/AuthServices"
+import {Tooltip} from "react-tooltip"
+
 
 
 function Navbar() {
 
 const navigate= useNavigate()
 const user = getUserDetails()
-if (!user) {
-  navigate('/')
-}
-const handleLogout = () =>{
-  localStorage.removeItem('users')
-  navigate('/')
-}
+
+const handleLogout = () => {
+  localStorage.removeItem("users");
+    navigate('/')
+  
+};
+
   const location= useLocation();
     const path=location.pathname
     const getTitle=() =>{
@@ -50,7 +53,9 @@ const handleLogout = () =>{
         <div className="flex items-center space-x-2">
         <img src="https://source.unsplash.com/100x100/?portrait" alt="" className="w-10 h-10 rounded-full dark:bg-gray-500" /> 
         </div>
-        <MdOutlineLogout onClick={handleLogout} className='text-black h-6 w-6'/>
+      <MdOutlineLogout data-tip="Déconnexion" onClick={handleLogout} className='text-black h-6 w-6 cursor-pointer'/>
+<Tooltip place="top" type="dark" effect="solid"/>
+
       </div>
     </nav>
      <div className='m-6'>
