@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import Sidebar from '../components/sideBare'
 import Navbar from '../components/Navbar'
 import { Navigate, Outlet, useNavigate } from 'react-router-dom'
-import CardNav from '../components/cardNav'
 import { getUserDetails } from '../Utils/getUser'
 
 export default function Template() {

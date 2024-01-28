@@ -2,7 +2,6 @@
 import React from 'react';
 import { AiOutlineSearch, AiOutlineBell } from "react-icons/ai";
 import { MdOutlineLogout } from "react-icons/md";
-import CardNav from './cardNav';
 import WelcomeSection from './WelcomSection';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { getUserDetails } from '../Utils/getUser';
