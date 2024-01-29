@@ -1,10 +1,19 @@
 import React, { useState } from 'react';
 import { FaImage } from "react-icons/fa";
-
+import HotelServices from "../services/HotelServices"
+import { getUserDetails } from '../Utils/getUser';
 
 export default function ModalAjout({ isModalOpen, setModalOpen }) {
 
   const [selectedFile, setSelectedFile] = useState(null);
+  const [NomHotel, setNomHotel] = useState('');
+  const [email, setEmail] = useState('');
+  const [Prix, setPrix] = useState('');
+  const [Adresse, setAdresse] = useState('');
+  const [Tel, setTel] = useState('');
+  const [Devise, setDevise] = useState('');
+  const user = getUserDetails();
+  const [image,setImage]= useState("")
 
   const handleOpenModal = () => {
     setModalOpen(!isModalOpen);
@@ -16,6 +25,29 @@ export default function ModalAjout({ isModalOpen, setModalOpen }) {
 
   const handleFileChange = (e) => {
     setSelectedFile(URL.createObjectURL(e.target.files[0]));
+    setImage(selectedFile)
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const hotelData = 
+      {NomHotel, 
+      email,
+      Prix,
+      Adresse,
+      image,
+      Tel,
+      Devise,
+      CreatedBy:user.userId
+
+      }
+
+      await HotelServices.createHotel(hotelData);
+      handleCloseModal();
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (
@@ -36,54 +68,45 @@ export default function ModalAjout({ isModalOpen, setModalOpen }) {
           <button onClick={handleCloseModal}>X</button>
         </div>
        <div className=''></div>
-          <form className=" p-6 ">
+          <form className=" p-6 " onSubmit={handleSubmit}>
             <div className="grid grid-cols-2 gap-4">
              <div className='text-start flex flex-col'>
               <label htmlFor="">Nom de l'hotel</label>
-              <input className="border p-2 rounded-xl w-80" type="text" />
-              </div>
-              <div className='text-start flex flex-col'>
-              <label htmlFor="">Email de l'hotel</label>
-              <input className="border p-2 rounded-xl w-80" type="email" />
-              </div>
-              <div className='text-start flex flex-col'>
-              <label htmlFor="">Prix par nuit</label>
-              <input className="border p-2 rounded-xl w-80" type="number" />
+              <input className="border p-2 rounded-xl w-80" type="text" value={NomHotel} onChange={(e) => setNomHotel(e.target.value)} />
               </div>
               <div className='text-start flex flex-col'>
               <label htmlFor="">Adresse</label>
-              <input className="border p-2 rounded-xl w-80" type="text" />
+              <input className="border p-2 rounded-xl w-80" type="text" value={Adresse} onChange={(e) => setAdresse(e.target.value)} />
               </div>
               <div className='text-start flex flex-col'>
-              <label htmlFor="">Numero de telephone</label>
-              <input className="border p-2 rounded-xl w-80" type="number" />
+              <label htmlFor="">Email de l'hotel</label>
+              <input className="border p-2 rounded-xl w-80" type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
               </div>
               <div className='text-start flex flex-col'>
-                <label htmlFor="currency">Devise</label>
-                <select className="border p-2 rounded-xl w-80" id="currency">
-                  <option value="dollar">Dollar</option>
-                  <option value="euro">Euro</option>
-                  <option value="fcfa">FCFA</option>
-                </select>
+              <label htmlFor="">Numero</label>
+              <input className="border p-2 rounded-xl w-80" type="text" value={Tel} onChange={(e) => setTel(e.target.value)} />
               </div>
-
-            </div>
-            <div className='text-start'><label className='text-start' htmlFor="">Ajouter une image</label></div>
-            <div className="relative border p-5 rounded col-span-2">
+              <div className='text-start flex flex-col'>
+              <label htmlFor="">Prix par nuit</label>
+              <input className="border p-2 rounded-xl w-80" type="number" value={Prix} onChange={(e) => setPrix(e.target.value)} />
+              </div>
+              <div className='text-start flex flex-col'>
+              <label htmlFor="">Devise</label>
+              <input className="border p-2 rounded-xl w-80" type="text" value={Devise} onChange={(e) => setDevise(e.target.value)} />
+              </div>
+              <div className='text-start'><label className='text-start' htmlFor="">Ajouter une image</label></div>
+              <div className="relative border p-5 rounded col-span-2">
                 <input type="file" onChange={handleFileChange} className="opacity-0 absolute inset-0 w-full h-full" />
                 <div className='w-28'>
-             {selectedFile && <img src={selectedFile} alt="Preview" />}
-             </div>
+                  {selectedFile && <img src={selectedFile} alt="Preview" />}
+                </div>
                 <div className="flex items-center flex-col justify-center">
                   <span className="material-icons text-5xl opacity-30"><FaImage /></span>
                   <span>Ajouter une Image</span>
                 </div>
               </div>
-         
-
-
-              <button type="submit" className="mt-4 bg-black text-white p-2 rounded">Enregistrer</button>
-              
+              <button type="submit" className="mt-4 bg-black text-white p-2 rounded">Envoyer</button>
+              </div>
           </form>
        </div>
         </div>

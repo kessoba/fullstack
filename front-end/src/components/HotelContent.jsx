@@ -1,50 +1,55 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { getUserDetails } from '../Utils/getUser';
+import {getErrorMessage } from './getErrorMessage';
+import { message } from 'antd';
 import CardHotel from './cardHotel';
+import HotelServices from "../services/HotelServices"
 
-const HotelContent = () => {
-    const hotels = [
-        {
-            image: "url_de_votre_image",
-            name: "Nom de l'hôtel",
-            price: "Prix de l'hôtel",
-            address: "Adresse de l'hôtel"
-        },
-        {
-          image: "url_de_votre_image",
-          name: "Nom de l'hôtel",
-          price: "Prix de l'hôtel",
-          address: "Adresse de l'hôtel"
-        },
-        {
-          image: "url_de_votre_image",
-          name: "Nom de l'hôtel",
-          price: "Prix de l'hôtel",
-          address: "Adresse de l'hôtel"
-        },
-        {
-          image: "url_de_votre_image",
-          name: "Nom de l'hôtel",
-          price: "Prix de l'hôtel",
-          address: "Adresse de l'hôtel"
-        },
-        // Ajoutez plus d'objets hôtel ici...
-    ];
+function HotelContent () {
+  const navigate = useNavigate();
+  const [hotel, setHotel] = useState([]);
 
-    return (
-        <div className="ml-80  mt-40 max-md:ml-8  scrolled max-md:mr-0 max-md:mt-40">
-           <div className="grid  grid-cols-1 scrolled gap-6 p-3 h-auto md:grid-cols-2  xl:grid-cols-4 sm:p-3 mx-auto">
-            {hotels.map((hotel, index) => (
-                <CardHotel
-                    key={index}
-                    image={hotel.image}
-                    name={hotel.name}
-                    price={hotel.price}
-                    address={hotel.address}
-                />
-            ))}
-            </div>
+  useEffect(() => {
+    const user = getUserDetails(); 
+    const getHotels = async () => {
+      try {
+        const response = await HotelServices.getHotels(user.userId);
+        setHotel(response.data);
+      } catch (err) {
+        if (err.response && err.response.status === 403) {
+          console.log("Erreur d'autorisation : Token invalide ou expiré");
+          navigate('/dashboard/HotelContent');
+        } else {
+          console.log("Erreur lors de la récupération des hôtels :", err);
+          message.error(getErrorMessage(err));
+        }
+      }
+    };
+    if (user) {
+      getHotels();
+    } else {
+      navigate('/dashboard/HotelContent');
+    }
+  }, [navigate]); 
+
+  return (
+    <div className="">
+      {hotel && hotel.length > 0 ? (
+        <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3">
+          {hotel.map((hotel, index) => (
+            <CardHotel
+              key={index}
+              image={hotel.image}
+              name={hotel.name}
+              price={hotel.price}
+              address={hotel.address}
+            />
+          ) )}
         </div>
-    );
-};
+      ): <p className='mt-44'>il nya pas dhotel</p>}
+    </div>
+  );
+}
 
 export default HotelContent;
