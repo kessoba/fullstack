@@ -16,7 +16,7 @@ APP.use(express.urlencoded({ extended: false }));
 // Enable CORS
 // Route for authentication
 APP.use("/api",AuthRoutes );
-APP.use("/api/hotel", HotelRoutes);
+APP.use("/api/hotel",HotelRoutes);
 
 // Start the server
 APP.listen(PORT, () => console.log("Le serveur a démarré au port " + PORT));

@@ -12,19 +12,18 @@ const createHotel = async (req, res) => {
         res.status(500).send(err);
     }
 };
-
-// const getHotels = async (req, res) => {
-//     let { userId } = req.params;
-//     try {
-//         const hotel = new Hotel(Data);
-//         const result = await hotel.find({ CreatedBy: userId });
-//         console.log(result);
-//         res.status(200).send(result);
-//     } catch (err) {
-//         console.log(err);
-//         res.status(400).send(err);
-//     }
-// };
+const getHotels = async (req, res) => {
+    let { userId } = req.params;
+    try {
+      
+        const result = await Hotel.find({ CreatedBy: userId });
+        console.log(result);
+        res.status(200).send(result);
+    } catch (err) {
+        console.log(err);
+        res.status(400).send(err);
+    }
+};
 
 // const updateHotel = async (req, res) => {
 //     try {
@@ -53,7 +52,7 @@ const createHotel = async (req, res) => {
 
 const HotelController = {
     createHotel,
-    // getHotels,
+     getHotels,
     // updateHotel,
     // deleteHotel
 };
