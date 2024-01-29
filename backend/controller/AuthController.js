@@ -34,13 +34,13 @@ async function loginUser(req,res){
       if(!isPasswordValid){
         return res.status(404).send({message:"Password s not valid"})
       }
-      // let token = jwt.sign({ userId: user?._id }, secretKey, { expiresIn: '1h' });
-      // let finalData ={
-      //   userId:user?._id,
-      //   Name:user?.Name,
-      //   email:user?.email,
-      //   token
-      // }
+      let token = jwt.sign({ userId: user?._id }, secretKey, { expiresIn: '1h' });
+      let finalData ={
+        userId:user?._id,
+        Name:user?.Name,
+        email:user?.email,
+        token
+      }
       res.send(finalData);
     }catch(err) {
         console.log(err)
