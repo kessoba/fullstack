@@ -13,7 +13,7 @@ const Connected = () => {
   const navigate = useNavigate();
 
   const inputs = [
-    { type: 'email', placeholder: 'E-mail', value: email, onChange: (e) => setEmail(e.target.value) },
+    { type: 'email', placeholder: 'E-mail', value:email, onChange: (e) => setEmail(e.target.value) },
     { type: 'password', placeholder: 'Mot de passe', value: password, onChange: (e) => setPassword(e.target.value) },
   ];
 
