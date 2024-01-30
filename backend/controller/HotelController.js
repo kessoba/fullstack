@@ -3,6 +3,7 @@ const Hotel = require("../models/hotelsModel");
 const createHotel = async (req, res) => {
     try {
         const Data = req.body;
+        console.log(Data)
         const hotel = new Hotel(Data);
         const result = await hotel.save();
         console.log(result);

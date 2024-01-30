@@ -55,7 +55,7 @@ export default function ModalAjout({ isModalOpen, setModalOpen }) {
       formData.append('Tel', Tel);
       formData.append('Devise', Devise);
       formData.append('CreatedBy', user.userId);
-      formData.append('image', SelectedFile);
+      formData.append('image', selectedFile);
 
       const response = await HotelServices.createHotel(formData);
       console.log(response.data);
