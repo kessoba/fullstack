@@ -12,7 +12,6 @@ export default function ModalAjout({ isModalOpen, setModalOpen }) {
   const [Adresse, setAdresse] = useState('');
   const [Tel, setTel] = useState('');
   const [Devise, setDevise] = useState('');
-  const user = getUserDetails();
   const [image,setImage]= useState(null)
   const [hotels, setHotels] = useState([]);
 
@@ -29,35 +28,20 @@ export default function ModalAjout({ isModalOpen, setModalOpen }) {
     setSelectedFile(URL.createObjectURL(e.target.files[0]));
     setImage(selectedFile)
   };
-
-  useEffect(() => {
-    const fetchHotels = async () => {
-      try {
-        const response = await HotelServices.getHotels(); // Assurez-vous que cette fonction existe et renvoie les hôtels
-        setHotels(response.data);
-      } catch (err) {
-        console.error(err);
-      }
-    };
-
-    fetchHotels();
-  }, []);
-
-
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const user = getUserDetails()
     try {
-      const formData = new FormData();
-      formData.append('NomHotel', NomHotel);
-      formData.append('email', email);
-      formData.append('Prix', Prix);
-      formData.append('Adresse', Adresse);
-      formData.append('Tel', Tel);
-      formData.append('Devise', Devise);
-      formData.append('CreatedBy', user.userId);
-      formData.append('image', selectedFile);
-
-      const response = await HotelServices.createHotel(formData);
+      const Data = {
+        NomHotel,
+        email, 
+        Prix,
+        Adresse,
+        Tel,
+        Devise,
+        CreatedBy:user.userId
+      }
+      const response = await HotelServices.createHotel(Data);
       console.log(response.data);
       handleCloseModal();
     } catch (error) {
@@ -65,7 +49,6 @@ export default function ModalAjout({ isModalOpen, setModalOpen }) {
     }
   };
 
-  // ... autres fonctions et rendus ...
 
 
   return (
@@ -102,7 +85,7 @@ export default function ModalAjout({ isModalOpen, setModalOpen }) {
               </div>
               <div className='text-start flex flex-col'>
               <label htmlFor="">Numero</label>
-              <input className="border p-2 rounded-xl w-80" type="text" value={Tel} onChange={(e) => setTel(e.target.value)} />
+              <input className="border p-2 rounded-xl w-80" type="number" value={Tel} onChange={(e) => setTel(e.target.value)} />
               </div>
               <div className='text-start flex flex-col'>
               <label htmlFor="">Prix par nuit</label>
@@ -111,7 +94,7 @@ export default function ModalAjout({ isModalOpen, setModalOpen }) {
               <div className='text-start flex flex-col'>
               <label htmlFor="">Devise</label>
               <input className="border p-2 rounded-xl w-80" type="text" value={Devise} onChange={(e) => setDevise(e.target.value)} />
-              </div>
+              </div> 
               <div className='text-start'><label className='text-start' htmlFor="">Ajouter une image</label></div>
               <div className="relative border p-5 rounded col-span-2">
                 <input type="file" onChange={handleFileChange} className="opacity-0 absolute inset-0 w-full h-full" />

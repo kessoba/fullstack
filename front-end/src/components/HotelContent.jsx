@@ -34,20 +34,20 @@ function HotelContent () {
   }, [navigate]); 
 
   return (
-    <div className="">
+    <div className="ml-80 mr-6 mt-40 max-md:ml-8  scrolled max-md:mr-0 max-md:mt-40">
       {hotel && hotel.length > 0 ? (
-        <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3">
+        <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {hotel.map((hotel, index) => (
             <CardHotel
               key={index}
               image={hotel.image}
-              name={hotel.name}
-              price={hotel.price}
-              address={hotel.address}
+              name={hotel.NomHotel}
+              price={hotel.Prix}
+              address={hotel.Adresse}
             />
           ) )}
         </div>
-      ): <p className='mt-44'>il nya pas dhotel</p>}
+    ):<div className='text-center ml-96 mt-80 '><h2 className=' text-3xl '>IL N Y'A PAS D'HOTELS AJOUTES !!</h2></div> }
     </div>
   );
 }
