@@ -27,10 +27,6 @@ const HotelSchema = new Schema({
         type: String,
         required: true,
     },
-    image: {
-        type: String,
-        required: true,
-    },
     CreatedBy: {
         ref: "User",
         type: Schema.ObjectId,

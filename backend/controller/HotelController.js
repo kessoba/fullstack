@@ -15,7 +15,6 @@ const createHotel = async (req, res) => {
 const getHotels = async (req, res) => {
     let { userId } = req.params;
     try {
-      
         const result = await Hotel.find({ CreatedBy: userId });
         console.log(result);
         res.status(200).send(result);

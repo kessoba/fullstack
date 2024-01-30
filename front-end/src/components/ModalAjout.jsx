@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { FaImage } from "react-icons/fa";
 import HotelServices from "../services/HotelServices"
 import { getUserDetails } from '../Utils/getUser';
@@ -13,7 +13,9 @@ export default function ModalAjout({ isModalOpen, setModalOpen }) {
   const [Tel, setTel] = useState('');
   const [Devise, setDevise] = useState('');
   const user = getUserDetails();
-  const [image,setImage]= useState("")
+  const [image,setImage]= useState(null)
+  const [hotels, setHotels] = useState([]);
+
 
   const handleOpenModal = () => {
     setModalOpen(!isModalOpen);
@@ -28,27 +30,43 @@ export default function ModalAjout({ isModalOpen, setModalOpen }) {
     setImage(selectedFile)
   };
 
+  useEffect(() => {
+    const fetchHotels = async () => {
+      try {
+        const response = await HotelServices.getHotels(); // Assurez-vous que cette fonction existe et renvoie les hôtels
+        setHotels(response.data);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    fetchHotels();
+  }, []);
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const hotelData = 
-      {NomHotel, 
-      email,
-      Prix,
-      Adresse,
-      image,
-      Tel,
-      Devise,
-      CreatedBy:user.userId
+      const formData = new FormData();
+      formData.append('NomHotel', NomHotel);
+      formData.append('email', email);
+      formData.append('Prix', Prix);
+      formData.append('Adresse', Adresse);
+      formData.append('Tel', Tel);
+      formData.append('Devise', Devise);
+      formData.append('CreatedBy', user.userId);
+      formData.append('image', SelectedFile);
 
-      }
-
-      await HotelServices.createHotel(hotelData);
+      const response = await HotelServices.createHotel(formData);
+      console.log(response.data);
       handleCloseModal();
-    } catch (err) {
-      console.error(err);
+    } catch (error) {
+      console.error(error);
     }
   };
+
+  // ... autres fonctions et rendus ...
+
 
   return (
     <div>
